@@ -243,7 +243,7 @@ class AwsS3 {
       try {
         final res = await req.send();
 
-        if (res.statusCode == 204) return '$endpoint/$uploadKey';
+        return '$endpoint/$uploadKey';
 
         return res.statusCode.toString();
       } catch (e) {
