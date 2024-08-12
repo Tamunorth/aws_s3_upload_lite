@@ -4,12 +4,12 @@ import 'dart:io';
 
 import 'package:amazon_cognito_identity_dart_2/sig_v4.dart';
 import 'package:flutter/foundation.dart';
-import '../enum/acl.dart';
-import '../src/utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
 import 'package:recase/recase.dart';
 
+import '../enum/acl.dart';
+import '../src/utils.dart';
 import './src/policy.dart';
 
 /// Convenience class for uploading files to AWS S3
@@ -242,6 +242,8 @@ class AwsS3 {
 
       try {
         final res = await req.send();
+
+        if (res.statusCode == 204) return '$endpoint/$uploadKey';
 
         return res.statusCode.toString();
       } catch (e) {
